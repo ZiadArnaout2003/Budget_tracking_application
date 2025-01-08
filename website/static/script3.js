@@ -3,7 +3,7 @@ let current_budget_span = document.getElementById("current_budget");
 let Zone=document.getElementById("Zone");
 
 let budget=1000;
-let current_budget=800;
+let current_budget=500;
 const ratio=current_budget/budget *100;
 
 budget_span.innerHTML = "/"+budget;  

@@ -1,0 +1,52 @@
+{% extends "base.html" %} 
+{% block title %}Connect_Bank{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+{% endblock %}
+{% block body %}
+<section id="sec1">
+  <div id="Connect">
+    <h1>Connect your bank account $</h1>
+    <ul>
+      <li>Have a direct link from your TYB to your bank account</li>
+      <li>You will have full autonomy to disconnect at any time</li>
+      <li>All transaction records are secure and protected</li>
+      <li>Let us do the work for you!</li>
+    </ul>
+  </div>
+  <div>
+    <i class="fa-sharp fa-solid fa-building-columns"></i>
+    <i class="fa-sharp fa-solid fa-arrow-right"></i>
+    <i class="fa-solid fa-wallet"></i>
+  </div>
+</section>
+<section id="sec2">
+  <div id="Manual">
+    <h2>Is it mandatory to give us this access to benefit from TYB?</h2>
+    <p>
+      We have built this automated system to make it as user-friendly and beneficial as possible. Most
+      people don't have the time to input every transaction conducted during a day. That's why we take
+      the responsibility to do it for the user, so they can enjoy our services without worrying about
+      anything.
+    </p>
+    <p>
+      That said, it can be very useful to manually enter the bill, the location of the transaction, and
+      the spending category. This helps us better analyze and understand your spending distribution,
+      allowing us to provide more customized advice.
+    </p>
+  </div>
+  <div>
+    <i class="fa-solid fa-wand-magic-sparkles"></i>
+  </div>
+</section>
+<div id="buttons">
+  <button id="LinkingButton" class="button">Link your bank now!</button>
+  <span class="or-separator">OR</span>
+  <button id="ManualBillButton" class="button">+ Add your bill manually</button>
+</div>
+{% block script %} 
+<script src="{{ url_for('static', filename='script2.js') }}"></script>
+{% endblock %}
+{% endblock %}
+
+

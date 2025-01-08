@@ -1,0 +1,73 @@
+
+h1,h2{
+    color: var(--primary-green);
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+p{
+    color: gray;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+#security{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+}
+.container{
+    width:70%;
+}
+#PlaidLink{
+    color: black;
+}
+#PlaidLink:hover{
+    color: var(--primary-green);
+}
+.fa-solid{
+    color: var(--primary-green);
+   font-size: 15rem;
+}
+#WhyUs{
+    display: flex;
+    align-items: center;
+    
+    gap: 2rem;
+
+}
+.container ul{
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+   
+}
+.container li{
+    color: gray;
+    font-size: 1.5rem;
+}
+#thinking{
+    width: 17rem;
+    height: 17rem;
+    color: var(--primary-green);
+}
+#Invitation{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20rem;
+    margin-bottom: 3rem;
+}
+.user_symbol{
+    display: flex;
+    color: var(--primary-green);
+    flex-direction: column;
+    gap: 1rem;
+}
+.user_symbol span{
+    
+    color: var(--primary-green);
+    font-size: 2rem;
+
+}

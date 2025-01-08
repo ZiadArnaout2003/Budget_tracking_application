@@ -1,0 +1,11 @@
+<!--Template structure  
+{% extends "base.html" %}
+{% block title %}
+{% endblock %}
+{% block styles %}
+{% endblock %}
+{% block body %}
+{% block script%}
+{% endblock %}
+{% endblock %}
+-->

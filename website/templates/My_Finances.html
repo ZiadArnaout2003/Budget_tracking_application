@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block title %}My Finances{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style3.css') }}">
+{% endblock %}
+{% block body %}
+    <main>
+      <h1>Your current budget :</h1>
+      <div id="budget-circle">
+        <p>Zone:<span id="Zone"></span></p>
+        <span id="current_budget"></span>
+        <p><span id="budget"></span></p>
+      </div>
+      <div id="Graphs-section">
+        <h2>Graphs:</h2>
+
+      </div>
+      <div id="Insights-section">
+        <h2>Insights on your expenditure :</h2>
+        
+      </div>
+    </main>
+   
+    {% block script %}
+    
+    <script src="{{ url_for('static', filename='script3.js') }}"></script>
+    {% endblock %}
+{% endblock %}
+

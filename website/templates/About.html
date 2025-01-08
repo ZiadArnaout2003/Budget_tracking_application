@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+ {% block title %}About{% endblock %}
+ {% block styles %} 
+ <link rel="stylesheet" href="{{ url_for('static', filename='style4.css') }}">
+
+ {% endblock %} 
+ {% block body %}
+<div id="security" class="main-view-appear">
+  <div class="container">
+    <h1>About Our Budget Tracking System</h1>
+    <p>
+      Welcome to TYB, your go-to platform for managing your finances
+      efficiently. We understand that tracking your budget is crucial for
+      achieving your financial goals, and that's why we've built a tool to make
+      this process simple and secure.
+    </p>
+    <h2>Our Commitment to Your Security</h2>
+    <p>
+      At TYB, we prioritize your privacy and the safety of your financial data.
+      To ensure your peace of mind, we integrate secure APIs like <a id="PlaidLink" href="https://plaid.com/" >Plaid</a>, a
+      trusted leader in financial data security. Plaid provides a secure
+      connection to your bank account, ensuring that your sensitive information
+      remains private and protected.
+    </p>
+  </div>
+  <i class="fa-solid fa-lock"></i>
+</div>
+<div id="WhyUs" class="scroll-appear">
+  <div class="container">
+    <h2>Why Choose TYB?</h2>
+    <ul>
+      <li>
+        Secure Data Protection: We use industry-standard encryption and security
+        protocols to safeguard your personal and financial information.
+      </li>
+      <li>
+        User-Friendly Interface: Our platform is designed with simplicity in
+        mind, allowing you to effortlessly track your expenses, set budgets, and
+        monitor your financial progress.
+      </li>
+      <li>
+        Comprehensive Financial Insights: With TYB, you'll have access to
+        detailed reports, spending trends, and budgeting tools that empower you
+        to take control of your finances.
+      </li>
+    </ul>
+  </div>
+  <img
+      id="thinking"
+      src="{{ url_for('static', filename='images/thinking.png') }}"
+      alt="Pic not available"
+    />
+</div>
+<div id="Invitation" class="scroll-appear">
+  <div class="container JoinUs">
+    <h2>Join Us on Your Financial Journey</h2>
+    <p>
+      We believe that financial freedom starts with understanding where your
+      money goes. Join thousands of users who've trusted TYB to track their
+      finances securely and confidently. Thank you for choosing TYB as your
+      partner in financial management. We look forward to helping you achieve
+      your financial goals.
+    </p>
+  </div>
+  <div class="user_symbol">
+  <i class="fa-solid fa-user"></i>
+  <span>Become part of this community!</span>
+</div>
+</div>
+{% block script %} {% endblock %} {% endblock %}

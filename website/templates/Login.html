@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}
+Login
+{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='Loginstyle.css') }}">
+{% endblock %}
+
+{% block body %}
+<div id="Login-Signup">
+    <div id="Signup">
+        <span>Don't have an account ?</span>
+        <a href="/Signup"> Sign up</a>
+    </div>
+    <div id="Login">
+        <h1>Login to your account</h1>
+        <form action="POST">
+            <label for="email">Email</label>
+            <input type="email" placeholder="Ex:johnst@gmail.com" required>
+            <label for="password">Password</label>
+            <input type="password" placeholder="Enter your password" required>
+            <button id="Submit">Submit</button>
+        </form>
+        
+    </div>
+</div>
+ <!-- Optional title for the page -->
+{% endblock %}
+
+{% block script %}
+<!-- Optional script section if needed -->
+{% endblock %}

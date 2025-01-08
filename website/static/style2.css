@@ -1,0 +1,99 @@
+
+#sec1 ,#sec2{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    font-size: 1.5rem;
+}
+#Connect {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: max-content;
+}
+#Connect h1 {
+    color: var(--primary-green);
+    text-decoration: underline;
+}
+#Connect ul {
+    list-style-type: none; /* Remove default bullets */
+  }
+  
+#Connect ul li {
+    margin-bottom: 1rem;
+    color: gray;
+    font-weight: bold;
+  }
+#Connect ul li::before {
+    content: "✔"; /* Unicode checkmark */
+    color: var(--primary-green);
+    font-size: 2rem;
+    margin-right: 0.5rem;
+
+  }
+.fa-solid{
+    color: var(--primary-green);
+    font-size: 9.5rem;
+}
+
+#Manual{
+    display: flex;
+    max-width: 50%;
+    flex-direction: column;
+    align-items: center;
+    justify-content:flex-start;
+    min-height: max-content;
+}
+#Manual h2{
+    color: var(--primary-green);
+    text-decoration: underline;
+    font-size: 2.5rem;
+}
+#Manual p {
+    line-height: 2.5rem;
+    color: gray;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+#LinkingButton{
+    font-family: "ADLaM Display", serif;
+    font-size:1.5rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+#LinkingButton:hover{
+    color: var(--primary-green);
+    background-color: var(--main-page-color);
+  }
+#buttons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:center;
+    min-height: max-content;
+    gap:1rem;
+}
+
+.button{
+  font-size: 1rem;
+  padding: 10px  0.65rem;
+  font-family: "ADLaM Display", serif;
+  font-weight:bold;
+  border-color: var(--primary-green);
+  border-radius:  0.65rem;
+  border-width: 5px;
+  background-color: var(--primary-green);
+  color: var(--main-page-color);
+  cursor: pointer;
+}
+#ManualBillButton{
+  background-color: var(--main-page-color);
+  color: var(--primary-green);
+  border-color: var(--main-page-color);
+  font-size: 1.5rem;
+
+}
+#ManualBillButton:hover{
+  background-color: var(--primary-green);
+  color: var(--main-page-color);
+}

@@ -1,0 +1,68 @@
+#Login-Signup{
+    width:50rem;
+    height:40rem;
+    border-radius: 20%;
+    display: flex;
+    background-color: white;
+    overflow: hidden;
+    box-shadow: 0 0 2px gray;
+    margin: auto;
+}
+#Signup{
+    flex-grow: 1;
+    font-size: 1rem;
+}
+#Signup form{
+    font-size: 1.5rem;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: flex-start;
+   gap: 1rem;
+   padding: 0 3rem 3rem 3rem;
+}
+#Signup label{
+    color: var(--primary-green);
+}
+#Signup input{
+    font-size:1rem;
+    border-color: black;  
+}
+#Signup input:focus{
+    border-width:0.2rem ;
+    border-color: var(--primary-green);
+}
+#Submit{
+    background-color:var(--main-page-color) ;
+    color: var(--primary-green);
+    border-radius: 10%;
+    border-color: transparent;
+    box-shadow: 0 0 2px gray;
+    font-size: 1.5rem;
+    font-family: "ADLaM Display", serif;
+
+}
+#Submit:hover{
+    background-color: var(--primary-green) ;
+    color:var(--main-page-color);
+}
+#Login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius:0 50% 50% 0 ;
+    background-color: var(--primary-green);
+    width: 25rem;
+    height: 100%;
+    font-size: 1.8rem;
+    color: black;
+}
+#Login a{
+    color: white;
+    text-decoration: underline;
+}
+#Login a:hover{
+    color:black;
+}
+
