@@ -14,18 +14,22 @@ Login
     </div>
     <div id="Signup">
         <h1>Create a new account</h1>
-        <form action="POST">
+        <form method="POST">
             <label for="first-name">First name</label>
-            <input type="text" placeholder="ex:john" required>
+            <input name="first_name" type="text" placeholder="ex:john" required>
             <label for="last-name">Last name</label>
-            <input type="text" placeholder="ex:stewart" required>
+            <input name="last_name" type="text" placeholder="ex:stewart" required>
             <label for="email">Email</label>
-            <input type="email" placeholder="Ex:johnst@gmail.com" required>
+            <input name="email" type="email" placeholder="Ex:johnst@gmail.com" required>
             <label for="password">Password</label>
-            <input type="password" placeholder="Enter your password" required>
+            <input  name="password" type="password"
+             placeholder="Enter your password" required 
+             minlength="8" maxlength="64">
             <label for="password"> Confirm Password</label>
-            <input type="password" placeholder="Confirm your password" required>
-            <button id="Submit">Submit</button>
+            <input name="confirm_password" type="password"
+            placeholder="Enter your password" required 
+            minlength="8" maxlength="64">
+            <button type="submit" id="Submit">Submit</button>
         </form>
         
     </div>

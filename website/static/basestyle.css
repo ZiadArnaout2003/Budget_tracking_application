@@ -4,14 +4,13 @@ html{
 :root{
     --primary-green: rgb(134, 188, 134);
     --main-page-color: rgb(254, 249, 249);    
-
 }
 
 body{
     font-family: "ADLaM Display", serif;
     box-sizing: border-box;
     background-color: var(--main-page-color);
-    margin:0 3rem;
+    margin:0 1rem;
     min-height: 100vh;
 }
 header{
@@ -21,14 +20,16 @@ header{
     margin-bottom:5rem;
 }
 .logo-container {
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center;    /* Center vertically */
     width: 15.25rem;           /* Set container width */
     height: 9.5rem;          /* Set container height */
     padding: 0; 
+    flex-shrink:0;
 }
-
+@media( max-width:790px){
+  .logo-container{
+  width: 10rem;           /* Set container width */
+  height: 6rem; }
+}
 .logo-container img {
     width: 100%;        /* Ensure the image fits within the container width */
     height: 100%;       /* Ensure the image fits within the container height */
@@ -49,6 +50,11 @@ nav {
     list-style: none;
     margin: 0;
     padding: 0;
+  }
+  @media (max-width: 1024px) {
+    nav ul {
+      font-size: 1rem;
+    }
   }
   
   nav li {
@@ -104,6 +110,8 @@ nav button:hover{
 }
 
 footer{
+    position: relative;
+    bottom: 0;
     display: flex;
     border-radius:50% 0 0 0; 
     justify-content: center;
@@ -169,4 +177,49 @@ footer a:hover{
 .main-view-appear{
   animation-delay: 3s;
     animation:main-appear  linear 0.75s alternate;
+}
+.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 1rem;
+  margin: 1rem 0;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between
+}
+
+.success {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #c3e6cb;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.close {
+  background-color: transparent;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  
+}
+.LinkingFlashMessage{
+  position: fixed;
+  top: 0;
+  width: 90%;
+  z-index: 9999;
+  text-align: start;
+  margin: auto;
+}
+.visible{
+  display: block;
+}
+.invisible{
+  display: none;
 }

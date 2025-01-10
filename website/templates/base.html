@@ -31,14 +31,37 @@
       </div>
       <nav>
         <ul>
+          {% if user.is_authenticated %}
           <li><a href="/">Home</a></li>
           <li><a href="/Connect_Bank">Connect Bank</a></li>
           <li><a href="/My_Finances">My Finances</a></li>
           <li><a href="/About">About</a></li>
+          {% else %}
+          <li><a href="/">Home</a></li>
+          <li><a href="/Connect_Bank">Connect Bank</a></li>
+          <li><a href="/About">About</a></li>
+          {% endif %}
         </ul>
-        <button id="LoginButton">Login</button>
+        {% if user.is_authenticated %}
+        <button id="LogoutButton" >Logout</button>
+        {% else %}
+        <button id="LoginButton" >Login</button>
+        {% endif %}
       </nav>
     </header>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="{{ category }} flashed-message">
+               <span>{{ message }}</span>
+               <button type="submit" class="close" 
+               style="color: {% if category == 'error' %}#721c24{% elif category == 'success' %}#155724{% endif %};"
+               >&times;</button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+
     <div class="container">{% block body %}{% endblock %}</div>
     <footer>
       <ul>

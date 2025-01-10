@@ -11,6 +11,7 @@ main .promo{
     justify-content: space-evenly;
     align-items: center;
 }
+
 .promo h1{
     font-size: 2rem;
 }
@@ -25,10 +26,9 @@ main .promo{
 
 
 .pic1-container {
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center;    /* Center vertically */
-    width:20rem;           /* Set container width */
+    flex-shrink: 0;
+    width: 40%;
+    max-width:20rem;           /* Set container width */
     height: 20rem;          /* Set container height */
     padding: 0;             /* Remove excessive padding */
     border-radius: 1rem;

@@ -1,9 +1,7 @@
-{% extends "base.html" %} 
-{% block title %}Connect_Bank{% endblock %}
-{% block styles %}
-<link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
-{% endblock %}
-{% block body %}
+{% extends "base.html" %} {% block title %}Connect_Bank{% endblock %} {% block
+styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}" />
+{% endblock %} {% block body %}
 <section id="sec1">
   <div id="Connect">
     <h1>Connect your bank account $</h1>
@@ -24,29 +22,91 @@
   <div id="Manual">
     <h2>Is it mandatory to give us this access to benefit from TYB?</h2>
     <p>
-      We have built this automated system to make it as user-friendly and beneficial as possible. Most
-      people don't have the time to input every transaction conducted during a day. That's why we take
-      the responsibility to do it for the user, so they can enjoy our services without worrying about
-      anything.
+      We have built this automated system to make it as user-friendly and
+      beneficial as possible. Most people don't have the time to input every
+      transaction conducted during a day. That's why we take the responsibility
+      to do it for the user, so they can enjoy our services without worrying
+      about anything.
     </p>
     <p>
-      That said, it can be very useful to manually enter the bill, the location of the transaction, and
-      the spending category. This helps us better analyze and understand your spending distribution,
-      allowing us to provide more customized advice.
+      That said, it can be very useful to manually enter the bill, the location
+      of the transaction, and the spending category. This helps us better
+      analyze and understand your spending distribution, allowing us to provide
+      more customized advice.
     </p>
+
   </div>
+
   <div>
     <i class="fa-solid fa-wand-magic-sparkles"></i>
   </div>
 </section>
+
 <div id="buttons">
   <button id="LinkingButton" class="button">Link your bank now!</button>
   <span class="or-separator">OR</span>
   <button id="ManualBillButton" class="button">+ Add your bill manually</button>
 </div>
-{% block script %} 
+
+<div id="Shadow" class="invisible"></div>
+<div id="ManualDataEntry" class="invisible">
+  <form action="/Connect_Bank" method="POST">
+    <label for="store_name">
+      Enter the store name
+      <input type="text" name="store_name" id="store_name" />
+    </label>
+    <label for="category-select">Choose a category:</label>
+    <select name="category" id="category-select">
+      <option value="grocery">Grocery</option>
+      <option value="clothes">Clothes</option>
+      <option value="mobile">Mobile</option>
+      <option value="utility bills">Utility Bills</option>
+      <option value="transportation">Transportation</option>
+      <option value="healthcare">Healthcare</option>
+      <option value="others">Others</option>
+    </select>
+    <div id="inputOthersContainer" style="display: none">
+      <input
+        type="text"
+        id="inputOthers"
+        name="inputOthers"
+        placeholder="enter a new category"
+      />
+    </div>
+    <label for="amount">I have spent </label>
+    <span> <input type="number" name="amount" id="amount" /> $</span>
+    <button id="SubmitForm" class="button">Submit</button>
+  </form>
+</div>
+<div id="transaction-table">
+  <h2>Transactions of {{ user.first_name }}</h2>
+  <table border="1">
+      <thead>
+          <tr>
+              <th>Store Name</th>
+              <th>Category</th>
+              <th>Amount</th>
+              <th>Date</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for transaction in transactions%}
+          <tr>
+              <td>{{ transaction.store_name }}</td>
+              <td>{{ transaction.category }}</td>
+              <td>{{ transaction.amount }}</td>
+              <td>{{ transaction.date }}</td>
+          </tr>
+          {% else %}
+          <tr>
+              <td colspan="4">No transactions available</td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+</div>
+
+
+{% block script %}
 <script src="{{ url_for('static', filename='script2.js') }}"></script>
-{% endblock %}
-{% endblock %}
-
-
+{% endblock %} {% endblock %}
