@@ -1,28 +1,56 @@
-{% extends "base.html" %} {% block title %}My Finances{% endblock %}
-{% block styles %}
-<link rel="stylesheet" href="{{ url_for('static', filename='style3.css') }}">
-{% endblock %}
-{% block body %}
-    <main>
-      <h1>Your current budget :</h1>
-      <div id="budget-circle">
-        <p>Zone:<span id="Zone"></span></p>
-        <span id="current_budget"></span>
-        <p><span id="budget"></span></p>
-      </div>
-      <div id="Graphs-section">
-        <h2>Graphs:</h2>
+{% extends "base.html" %} {% block title %}My Finances{% endblock %} {% block
+styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style3.css') }}" />
+{% endblock %} {% block body %}
+<main>
+  <div id="Set-your-budget">
+    <h1>Set your budget</h1>
+    <p>
+      Start your journey by setting a reasonable amount to spend this month!
+    </p>
+    <button class="button" id="setBudgetButton">Set budget</button>
+  </div>
+  <div id="Transaction-History">
+    <h1>Transactions History:</h1>
+    <button id="ManualBillButton" class="button">+ Add your bill manually</button>
+    <div id="Shadow" class="invisible"></div>
+    <div id="ManualDataEntry" class="invisible">
+      <button id="closeManual">X</button>
+      <form action="#" method="POST" id="SubmittedForm">
+        <input type="hidden" name="actionType" id="action-type" >
+      </form>
+    </div>
+    <div id="transaction-table-div">
+      <h2>Transactions of {{ user.first_name }}</h2>
+      <table id="transaction-table" border="1">
+        <thead>
+          <tr>
+            <th>Store Name</th>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+  <h1>Your current budget :</h1>
+  <div id="budget-circle">
+    <p>Zone:<span id="Zone"></span></p>
+    <span id="current_balance"></span>
+    <p><span id="budget"></span></p>
+  </div>
+  <div id="Graphs-section">
+    <h2>Graphs:</h2>
+  </div>
+  <div id="Insights-section">
+    <h2>Insights on your expenditure :</h2>
+  </div>
+</main>
 
-      </div>
-      <div id="Insights-section">
-        <h2>Insights on your expenditure :</h2>
-        
-      </div>
-    </main>
-   
-    {% block script %}
-    
-    <script src="{{ url_for('static', filename='script3.js') }}"></script>
-    {% endblock %}
-{% endblock %}
+{% block script %}
 
+<script src="{{ url_for('static', filename='script3.js') }}" type="module"></script>
+{% endblock %} {% endblock %}

@@ -122,6 +122,18 @@ footer{
     font-size: 1rem;
     margin-top: 3rem;
 }
+.button{
+  font-size: 1rem;
+  padding: 10px  0.65rem;
+  font-family: "ADLaM Display", serif;
+  font-weight:bold;
+  border-color: var(--primary-green);
+  border-radius:  0.65rem;
+  border-width: 5px;
+  background-color: var(--primary-green);
+  color: var(--main-page-color);
+  cursor: pointer;
+}
 footer ul{
     font-size:1.75rem;
     display: flex;

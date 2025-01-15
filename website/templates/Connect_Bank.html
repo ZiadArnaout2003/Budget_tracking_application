@@ -2,6 +2,7 @@
 styles %}
 <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}" />
 {% endblock %} {% block body %}
+
 <section id="sec1">
   <div id="Connect">
     <h1>Connect your bank account $</h1>
@@ -48,63 +49,6 @@ styles %}
   <button id="ManualBillButton" class="button">+ Add your bill manually</button>
 </div>
 
-<div id="Shadow" class="invisible"></div>
-<div id="ManualDataEntry" class="invisible">
-  <form action="/Connect_Bank" method="POST">
-    <label for="store_name">
-      Enter the store name
-      <input type="text" name="store_name" id="store_name" />
-    </label>
-    <label for="category-select">Choose a category:</label>
-    <select name="category" id="category-select">
-      <option value="grocery">Grocery</option>
-      <option value="clothes">Clothes</option>
-      <option value="mobile">Mobile</option>
-      <option value="utility bills">Utility Bills</option>
-      <option value="transportation">Transportation</option>
-      <option value="healthcare">Healthcare</option>
-      <option value="others">Others</option>
-    </select>
-    <div id="inputOthersContainer" style="display: none">
-      <input
-        type="text"
-        id="inputOthers"
-        name="inputOthers"
-        placeholder="enter a new category"
-      />
-    </div>
-    <label for="amount">I have spent </label>
-    <span> <input type="number" name="amount" id="amount" /> $</span>
-    <button id="SubmitForm" class="button">Submit</button>
-  </form>
-</div>
-<div id="transaction-table">
-  <h2>Transactions of {{ user.first_name }}</h2>
-  <table border="1">
-      <thead>
-          <tr>
-              <th>Store Name</th>
-              <th>Category</th>
-              <th>Amount</th>
-              <th>Date</th>
-          </tr>
-      </thead>
-      <tbody>
-          {% for transaction in transactions%}
-          <tr>
-              <td>{{ transaction.store_name }}</td>
-              <td>{{ transaction.category }}</td>
-              <td>{{ transaction.amount }}</td>
-              <td>{{ transaction.date }}</td>
-          </tr>
-          {% else %}
-          <tr>
-              <td colspan="4">No transactions available</td>
-          </tr>
-          {% endfor %}
-      </tbody>
-  </table>
-</div>
 
 
 {% block script %}
