@@ -90,6 +90,12 @@ async function fetchCurrentBalance() {
         return null;
     }
 }
+function LoadTransactions() {
+                
+    const transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+    transactions.forEach(transaction => {
+        addTransactionRow(transaction);
+    })};
 function Barchart() {
     const ctx = document.getElementById('BarChart').getContext('2d');
     fetch('/bar-chart-data', { method: 'GET' }).then(response => response.json())
@@ -283,7 +289,7 @@ Piechart();
 Barchart();
 
 document.addEventListener('DOMContentLoaded', async() => {
-
+    LoadTransactions();
     budget = parseFloat(JSON.parse(localStorage.getItem("budget")) || 0);
     current_balance = parseFloat(await fetchCurrentBalance());
     localStorage.setItem("current_balance", JSON.stringify(current_balance));
@@ -450,11 +456,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
-    window.onload = function() {
-                
-                const transactions = JSON.parse(localStorage.getItem("transactions")) || [];
-                transactions.forEach(transaction => {
-                    addTransactionRow(transaction);
-                })};
+
 
 
