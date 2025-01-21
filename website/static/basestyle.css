@@ -25,6 +25,9 @@ header{
     padding: 0; 
     flex-shrink:0;
 }
+.logo-container::after{
+  
+}
 @media( max-width:790px){
   .logo-container{
   width: 10rem;           /* Set container width */

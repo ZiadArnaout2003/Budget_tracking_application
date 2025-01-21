@@ -2,8 +2,8 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
-from flask_socketio import SocketIO, emit
-socketio = SocketIO()
+# from flask_socketio import SocketIO, emit
+# socketio = SocketIO()
 # Create the SQLAlchemy object
 db = SQLAlchemy()
 
@@ -16,7 +16,7 @@ def create_app():
     
     # Initialize the app with db
     db.init_app(app)
-    socketio.init_app(app)
+    # socketio.init_app(app)
     # Register blueprints
     from .views import views
     from .auth import auth
