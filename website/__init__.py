@@ -21,7 +21,8 @@ def create_app():
     from .auth import auth
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
-
+    from .views import Bar_chart_data
+    
     # Import models here
     from .models import User,Transaction
    

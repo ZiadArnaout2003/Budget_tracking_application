@@ -29,6 +29,7 @@ styles %}
             <th>Category</th>
             <th>Amount</th>
             <th>Date</th>
+            <th>Time</th>
             <th></th>
           </tr>
         </thead>
@@ -36,21 +37,28 @@ styles %}
       </table>
     </div>
   </div>
+  <div id="remaining-money">
   <h1>Your current budget :</h1>
   <div id="budget-circle">
     <p>Zone:<span id="Zone"></span></p>
     <span id="current_balance"></span>
     <p><span id="budget"></span></p>
   </div>
+</div>
   <div id="Graphs-section">
-    <h2>Graphs:</h2>
+  <h2 >Graphs:</h2>
+    <canvas id="BarChart" ></canvas>
+    <canvas id="PieChart" ></canvas>
+    <canvas id="LineChart" ></canvas>
+ 
   </div>
   <div id="Insights-section">
-    <h2>Insights on your expenditure :</h2>
+    <h1>Insights on your expenditure :</h1>
+    
   </div>
 </main>
 
 {% block script %}
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="{{ url_for('static', filename='script3.js') }}" type="module"></script>
 {% endblock %} {% endblock %}

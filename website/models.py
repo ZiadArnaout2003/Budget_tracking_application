@@ -4,14 +4,15 @@ from sqlalchemy.sql import func  # Add this import
 from datetime import datetime
 import pytz
 
-tz = pytz.timezone('America/Montreal')
-datetime.now(tz)
+
+def current_time():
+    return datetime.now(pytz.timezone('US/Eastern'))
 class Transaction(db.Model):
     id = db.Column(db.Integer, primary_key=True)  # Add primary key
     store_name = db.Column(db.String(100))
     category = db.Column(db.String(100))
     amount = db.Column(db.Float, nullable=False)
-    date = db.Column(db.DateTime(timezone=True),default=datetime.now(pytz.timezone('US/Eastern'))) # func.now() requires import of func
+    date = db.Column(db.DateTime(timezone=True), default=current_time)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 class User(db.Model, UserMixin):

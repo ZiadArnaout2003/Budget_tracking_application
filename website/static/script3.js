@@ -14,13 +14,17 @@ const Elements = {
         shadow: document.getElementById("Shadow"),
     },
     submittedForm : document.getElementById("SubmittedForm"),
-    selectElement: document.getElementById('category-select'),
     actionTypeInput: document.getElementById('action-type'),
-    inputOthersContainer: document.getElementById('inputOthersContainer'),
     transactionTable: document.querySelector("#transaction-table tbody")
 };
+// Global variables
+if (localStorage.getItem('HasSetBudget') === null) {
+    localStorage.setItem('HasSetBudget', 'false'); // First-time initialization
+  }
+
 let current_balance = 0;
 let budget = 0;
+//--------------------------------------------------------------------------
 function addTransactionRow(data) {
     const newRow = `
         <tr data-id="${data.id}">
@@ -28,6 +32,7 @@ function addTransactionRow(data) {
             <td>${data.category}</td>
             <td>${data.amount}</td>
             <td>${data.date}</td>
+            <td>${data.time}</td>
             <td><button data-action="delete" class="delete">DELETE</button></td>
         </tr>
     `;
@@ -85,8 +90,200 @@ async function fetchCurrentBalance() {
         return null;
     }
 }
+function Barchart() {
+    const ctx = document.getElementById('BarChart').getContext('2d');
+    fetch('/bar-chart-data', { method: 'GET' }).then(response => response.json())
+    .then(store_data => { 
+        const myChart = new Chart(ctx, {
+            type: 'bar', // Chart type
+            data: {
+                labels: store_data.store_name, // X-axis labels
+                datasets: [{
+                    label: 'Amount Spent ($)', // Dataset label (for legend)
+                    data: store_data.amount, // Data points
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.9)',
+                        'rgba(54, 162, 235, 0.9)',
+                        'rgba(255, 206, 86, 0.9)',
+                        'rgba(75, 192, 192, 0.9)',
+                        'rgba(153, 102, 255, 0.9)',
+                        'rgba(255, 159, 64, 0.9)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1 // Border width of the bars
+                }]
+            },
+            options: {
+                responsive: true, // Chart adjusts to the size of the canvas
+                plugins: {
+                    legend: {
+                        display: false // Hide the legend
+                    },
+                    title: {
+                        display: true, // Show the title
+                        text: 'Top 6 Stores by Amount Spent', // Title text
+                        font: {
+                            size: 18 // Font size for the title
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true, // Start Y-axis at 0
+                        title: {
+                            display: true, // Show Y-axis title
+                            text: 'Amount Spent ($)', // Y-axis title text
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true, // Show X-axis title
+                            text: 'Store Names', // X-axis title text
+                        }
+                    }
+                }
+            }
+        });
+    });
+}
+function Linechart() {
+    const ctx = document.getElementById('LineChart').getContext('2d');
+    
+    fetch('/line-chart-data', { method: 'GET' })
+        .then(response => response.json())
+        .then(money_over_days => 
+           {const myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: money_over_days.date,
+                    datasets: [{
+                        data: money_over_days.money,
+                        borderColor: 'rgb(134, 188, 134)', // Line color
+                        backgroundColor: 'rgb(134, 188, 134,0.2)', // Fill color under the line
+                        tension: 0.3, // Smooth curve
+                        fill: true, // Fill area under the line
+                        pointRadius: 6, // Size of the points on the line
+                        pointHoverRadius: 8, // Size of the points on hover
+                        pointBackgroundColor: 'rgb(134, 188, 134)', // Color of the points
+                        pointBorderColor: 'rgba(255, 255, 255, 1)', // Border color of the points
+                        pointBorderWidth: 2 // Border width of the points
+                    }]
+                },        options: {
+                    responsive: true, // Chart adjusts to the size of the canvas
+                    plugins: {
+                        legend: {
+                            display: false, // Show the legend
+                           
+                        },
+                        title: {
+                            display: true, // Show the title
+                            text: 'Money spent over a month', // Title text
+                            font: {
+                                size: 18 // Font size for the title
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true, // Start Y-axis at 0
+                            title: {
+                                display: true, // Show Y-axis title
+                                text: 'Amount Spent ($)', // Y-axis title text
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true, // Show X-axis title
+                                text: 'Time', // X-axis title text
+                            }
+                        }
+                    }
+                }
+            })
+        });
+    }
+function Piechart() {
+    const ctx = document.getElementById('PieChart').getContext('2d');
+
+    fetch('/pie-chart-data', { method: 'GET' })
+        .then(response => response.json())
+        .then(category_data => {
+            // Check if the data is empty
+            if (category_data.portion.length === 0) {
+                category_data = {
+                    category: ["No Data"],
+                    portion: [1] // Placeholder value
+                };
+            }
+
+            // Create the pie chart
+            const myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: category_data.category,
+                    datasets: [{
+                        data: category_data.portion,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.9)',
+                            'rgba(54, 162, 235, 0.9)',
+                            'rgba(255, 206, 86, 0.9)',
+                            'rgba(75, 192, 192, 0.9)',
+                            'rgba(153, 102, 255, 0.9)',
+                            'rgba(255, 159, 64, 0.9)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        },
+                        title: {
+                            display: true,
+                            text: 'Amount Spent by Category',
+                            font: {
+                                size: 18
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return context.label === "No Data"
+                                        ? "No data available"
+                                        : context.label + ": " + context.raw + "%";
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+}
+
+Linechart();
+Piechart();
+Barchart();
 
 document.addEventListener('DOMContentLoaded', async() => {
+
     budget = parseFloat(JSON.parse(localStorage.getItem("budget")) || 0);
     current_balance = parseFloat(await fetchCurrentBalance());
     localStorage.setItem("current_balance", JSON.stringify(current_balance));
@@ -101,20 +298,42 @@ document.addEventListener('DOMContentLoaded', async() => {
         updateBudgetCircle(current_balance, budget);
     }
 });
+
 document.addEventListener('DOMContentLoaded', () => {
     Elements.connectButtons.setBudgetButton.addEventListener('click', (e) => {
+
         e.preventDefault();
         ClearForm();
-        Elements.submittedForm.innerHTML=
+        if (localStorage.getItem("HasSetBudget") === "true") {
+            // Show confirmation alert if a budget is already set
+            const confirmation = confirm(
+              "Are you sure you want to set a new budget? This will remove all previous transactions!"
+            );
+            if (confirmation) {
+            localStorage.removeItem('transactions');
+            Elements.submittedForm.innerHTML=
+            `<input type="hidden" name="actionType" id="action-type" value="balance">
+            <label for="balance"> 
+            Set your budget </label>
+            <input type="text" name="balance" id="balance" required/>
+            <button type="submit" class="button" >Submit</button>`;
+            Elements.actionTypeInput.value = "balance";
+            toggleVisibility(Elements.appearingDivs.shadow, true);
+            toggleVisibility(Elements.appearingDivs.manualDataEntry, true);
+            }
+        }
+         else {
+            Elements.submittedForm.innerHTML=
         `<input type="hidden" name="actionType" id="action-type" value="balance">
-        <label for="balance">
-        Set your budget
+        <label for="balance"> 
+        Set your budget </label>
         <input type="text" name="balance" id="balance" required/>
-        </label>
         <button type="submit" class="button" >Submit</button>`;
         Elements.actionTypeInput.value = "balance";
         toggleVisibility(Elements.appearingDivs.shadow, true);
         toggleVisibility(Elements.appearingDivs.manualDataEntry, true);
+        }
+        
     })
     if (Elements.connectButtons.manualBillButton) {
         Elements.connectButtons.manualBillButton.addEventListener('click', (e) => {
@@ -149,9 +368,21 @@ document.addEventListener('DOMContentLoaded', () => {
               <button type="submit" class="button">Submit</button>`;
             toggleVisibility(Elements.appearingDivs.shadow, true);
             toggleVisibility(Elements.appearingDivs.manualDataEntry, true);
+
+            //Add an input if others is selected
+
+            let selectElement= document.getElementById('category-select');
+            let inputOthersContainer= document.getElementById('inputOthersContainer');
+            selectElement.addEventListener('change', function() {
+                if (this.value === "others") {
+                    inputOthersContainer.style.display = 'block';
+                } else {
+                    inputOthersContainer.style.display = 'none';
+                }
+            })
         });
     }
-
+    // Close the manual data entry div
     if (Elements.connectButtons.manualCloseButton) {
         Elements.connectButtons.manualCloseButton.addEventListener('click', (e) => {
             e.preventDefault();
@@ -159,10 +390,10 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleVisibility(Elements.appearingDivs.manualDataEntry, false);
         });
     }
-     
+    // Handle form submission
     if (Elements.submittedForm) {
             Elements.submittedForm.addEventListener("submit", (e) => {
-                e.preventDefault();  // Prevent the form from submitting the traditional way
+                e.preventDefault();  
                 toggleVisibility(Elements.appearingDivs.shadow, false);
                 toggleVisibility(Elements.appearingDivs.manualDataEntry, false);
         
@@ -185,9 +416,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         localStorage.setItem("budget", JSON.stringify(budget));
                         localStorage.setItem("current_balance", JSON.stringify(current_balance));
                         window.location.reload();
+                        localStorage.setItem("HasSetBudget", true);
                     }
                     else{
-                        
+                     
                     // Store the new transaction data in localStorage
                     const transactions = JSON.parse(localStorage.getItem("transactions")) || [];
                     transactions.push(data);  // Add the new transaction
@@ -199,6 +431,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }})
                 });
             }
+    // Tavle row deletion
     document.querySelector('table').addEventListener('click', (e) => {
         if (e.target.dataset.action === 'delete') {
             const row = e.target.closest('tr');

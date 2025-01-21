@@ -11,7 +11,7 @@ body{
     box-sizing: border-box;
     background-color: var(--main-page-color);
     margin:0 1rem;
-    min-height: 100vh;
+   
 }
 header{
     display: flex;
