@@ -92,9 +92,11 @@ async function fetchCurrentBalance() {
 }
 function LoadTransactions() {
                 
-    const transactions = JSON.parse(localStorage.getItem("transactions")) || [];
-    transactions.forEach(transaction => {
-        addTransactionRow(transaction);
+    fetch('/transactions', { method: 'GET' }).then(response => response.json())
+    .then(transactions => {
+        transactions.forEach(transaction => {
+            addTransactionRow(transaction);
+    })
     })};
 function Barchart() {
     const ctx = document.getElementById('BarChart').getContext('2d');

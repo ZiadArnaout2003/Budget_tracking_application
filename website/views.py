@@ -57,6 +57,29 @@ def My_Finances():
             return jsonify({'balance': balance})
         
     return render_template('My_Finances.html', user=current_user)
+@views.route('/transactions', methods=['GET'])
+@login_required
+def Load_all_transactions():
+    from .models import Transaction
+    # Query all transactions for the current user
+    AllTransactions = Transaction.query.filter_by(user_id=current_user.id)
+    
+    # Prepare a list of transaction responses
+    AllTransactionsResponse = []
+    for transaction in AllTransactions:
+        response = {
+            'id': transaction.id,
+            'store_name': transaction.store_name,
+            'category': transaction.category,
+            'amount': transaction.amount,
+            'date': transaction.date.strftime('%Y-%m-%d'),  # Format the date
+            'time': transaction.date.strftime('%H:%M:%S')   # Format the time
+        }
+        AllTransactionsResponse.append(response)
+
+    # Return the full list of transactions as JSON
+    return jsonify(AllTransactionsResponse)
+
 @views.route('/About')
 def About():
     return render_template('About.html',user=current_user)
