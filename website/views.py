@@ -2,9 +2,10 @@ from flask import Blueprint,render_template,request,jsonify
 from flask_login import current_user,login_required
 from sqlalchemy.sql import func  # Add this import
 from sqlalchemy.sql import func  # Add this import
-
+from . import socketio
 from . import db
 views=Blueprint('views', __name__)
+
 @views.route('/')
 def index():
     return render_template('index.html',user=current_user)
@@ -13,12 +14,17 @@ def connect_bank():
     return render_template('Connect_Bank.html', user=current_user)
 
 
+
+# Notify clients of a new transaction
+def notify_transaction_update():
+    socketio.emit('transaction_update', {'message': 'New transaction added'})
 @views.route('/My_Finances', methods=['GET', 'POST'])
 @login_required
 def My_Finances():
     if request.method == 'POST':
         action_type = request.form.get('actionType')
         print("The action type is",action_type)
+        notify_transaction_update()
         if action_type == 'transaction':
             print("The action type is transaction")
             store_name = request.form.get('store_name')
@@ -76,7 +82,7 @@ def Load_all_transactions():
             'time': transaction.date.strftime('%H:%M:%S')   # Format the time
         }
         AllTransactionsResponse.append(response)
-
+    notify_transaction_update()
     # Return the full list of transactions as JSON
     return jsonify(AllTransactionsResponse)
 
@@ -106,7 +112,7 @@ def delete_transaction(target_id):
         # Delete the transaction
         db.session.delete(target_transaction)
         db.session.commit()
-
+        notify_transaction_update()
         # Return the updated balance
         return jsonify({'balance': current_user.balance}), 200
 

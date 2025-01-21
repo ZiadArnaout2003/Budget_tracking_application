@@ -90,8 +90,7 @@ async function fetchCurrentBalance() {
         return null;
     }
 }
-function LoadTransactions() {
-                
+function LoadTransactions() {      
     fetch('/transactions', { method: 'GET' }).then(response => response.json())
     .then(transactions => {
         transactions.forEach(transaction => {
@@ -289,6 +288,11 @@ function Piechart() {
 Linechart();
 Piechart();
 Barchart();
+const socket = io(); // Connect to the WebSocket server
+// Listen for the 'transaction_update' event
+socket.on('transaction_update', (data) => {
+    LoadTransactions();
+});
 
 document.addEventListener('DOMContentLoaded', async() => {
     LoadTransactions();
