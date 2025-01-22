@@ -17,6 +17,7 @@ header{
     display: flex;
     justify-content: space-evenly;
     align-items:center;
+    flex-wrap: wrap;
     margin-bottom:5rem;
 }
 .logo-container {
@@ -24,20 +25,37 @@ header{
     height: 9.5rem;          /* Set container height */
     padding: 0; 
     flex-shrink:0;
+    position: relative;
 }
 .logo-container::after{
-  
+  font-style: italic;
+  content:"Track Your Budget";
+  position:absolute;
+  bottom:1.5rem;
+  left:37%;
+  width:max-content;
+  transform: translateX(-50%);
+  color: gray;
+  font-size: 1rem;
+  font-weight: bold;
 }
+
 @media( max-width:790px){
   .logo-container{
   width: 10rem;           /* Set container width */
   height: 6rem; }
+  .logo-container::after{
+    font-size: 0.75rem;
+    bottom:1rem;
+    left:37%;
+  }
 }
 .logo-container img {
     width: 100%;        /* Ensure the image fits within the container width */
     height: 100%;       /* Ensure the image fits within the container height */
     object-fit: contain;    /* Maintain aspect ratio and fit inside the container */
 }
+
 
 
 nav {
@@ -124,6 +142,7 @@ footer{
     color: white;
     font-size: 1rem;
     margin-top: 3rem;
+    
 }
 .button{
   font-size: 1rem;

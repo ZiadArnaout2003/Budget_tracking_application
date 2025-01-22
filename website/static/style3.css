@@ -6,7 +6,9 @@
 main {
     display: flex;
     flex-direction: column;
-    min-height: 40rem;
+    align-items: center;
+    justify-content: center;
+
     margin-bottom: 5rem;
 } 
 main h1{
@@ -140,6 +142,16 @@ main h1{
       width: 100%;
       border-collapse: collapse;
     }
+  @media (max-width: 768px) {
+    #transaction-table-div{
+      font-size: 0.8rem;
+
+    }
+    #transaction-table-div h2{
+      font-size: 0.8rem;
+
+    }
+  }
     
     th, td {
       padding: 8px;
@@ -223,11 +235,10 @@ main h2{
     align-items: center;
     justify-content: center;
     gap: 3rem;
-    border-radius: 0.5rem;
+    min-height: max-content;
     font-weight: bold;
+    min-width:45%;
 }
-canvas{ 
-    max-height: 30rem;
-    max-width:80%;
-    font-size: 1.5rem;   
-}
+#PieChart{
+    width:50%;
+  }
