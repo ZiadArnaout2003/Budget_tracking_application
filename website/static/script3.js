@@ -223,6 +223,7 @@ function Piechart() {
         .then(response => response.json())
         .then(category_data => {
             // Check if the data is empty
+            console.log(category_data);
             if (category_data.portion.length === 0) {
                 category_data = {
                     category: ["No Data"],

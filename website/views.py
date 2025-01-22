@@ -155,10 +155,11 @@ def Bar_chart_data():
 def Pie_chart_data():
     from .models import Transaction
     try:
-        # Query the transactions table to count occurrences of store names
+        # Get the total money spent
+        money_spent = db.session.query(func.sum(Transaction.amount)).scalar()      
         category_percentage = db.session.query(
             Transaction.category,          # Column to group by
-            func.sum(Transaction.amount)/current_user.balance*100
+            func.sum(Transaction.amount)/money_spent*100
         ).group_by(Transaction.category).all()
 
      
@@ -169,7 +170,7 @@ def Pie_chart_data():
         # Populate the lists from query results
         for category,portion in category_percentage:
             CATEGORY.append(category)
-            PORTION.append(portion)
+            PORTION.append(round(portion, 2))
         # Prepare the data dictionary
         response_data = {"category": CATEGORY, "portion": PORTION}
         return jsonify(response_data)
