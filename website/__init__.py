@@ -1,9 +1,10 @@
-from flask import Flask
+from flask import Flask,session
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
-# from flask_socketio import SocketIO, emit
-# socketio = SocketIO()
+from datetime import timedelta
+
+
 # Create the SQLAlchemy object
 db = SQLAlchemy()
 
@@ -16,7 +17,6 @@ def create_app():
     
     # Initialize the app with db
     db.init_app(app)
-    # socketio.init_app(app)
     # Register blueprints
     from .views import views
     from .auth import auth
@@ -35,7 +35,10 @@ def create_app():
     @login_manager.user_loader
     def load_user(id):
         return User.query.get(int(id))
-    
+    app.permanent_session_lifetime=timedelta(minutes=15)
+    @app.before_request
+    def make_session_permanent():
+        session.permanent = True
     return app
 
 
