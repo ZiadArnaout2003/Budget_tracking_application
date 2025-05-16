@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
 from datetime import timedelta
+import os
 
 
 # Create the SQLAlchemy object
@@ -13,8 +14,11 @@ DB_NAME = "database.db"  # Define the database name
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'mysecretkey'
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
-    
+    uri = os.environ.get("DATABASE_URL")
+    if uri and uri.startswith("postgres://"):
+     uri = uri.replace("postgres://", "postgresql://", 1)
+    app.config['SQLALCHEMY_DATABASE_URI'] = uri 
+
     # Initialize the app with db
     db.init_app(app)
     # Register blueprints
@@ -48,7 +52,6 @@ def create_app():
 
 def create_database(app):
     with app.app_context():  # Use the app context here
-        if not path.exists('website/' + DB_NAME):
             db.create_all()  # This should work without passing 'app'
             print('Created database')
 
