@@ -1,7 +1,7 @@
-💰 Budget Tracker App
+# 💰 Budget Tracker App
 A simple and user-friendly web app to help you manage your finances, track spending, and stay within your budget!
 
-🚀 Features
+### 🚀 Features
 🎯 Set a goal budget to keep your spending in check
 
 ✍️ Add customized transactions manually (income or expenses)
@@ -14,7 +14,7 @@ A simple and user-friendly web app to help you manage your finances, track spend
 
 🐘 Uses PostgreSQL with SQLAlchemy ORM for robust data management
 
-🛠️ Technologies Used
+### 🛠️ Technologies Used
 Python & Flask (Backend)
 
 Jinja2 (HTML templating)
@@ -25,7 +25,7 @@ PostgreSQL (Database)
 
 SQLAlchemy (ORM for database handling)
 
-🧩 What to Improve
+### 🧩 What to Improve
 🔗 Integrate Plaid API to fetch transactions automatically from your bank accounts for seamless tracking
 
 💡 Add user authentication for personalized budget management
@@ -34,7 +34,7 @@ SQLAlchemy (ORM for database handling)
 
 ⚡ Optimize performance and handle larger datasets
 
-📋 How to Use
+### 📋 How to Use
 Set your monthly or weekly budget goal
 
 Add your transactions manually with custom descriptions and amounts
